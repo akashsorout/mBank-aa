@@ -1,0 +1,22 @@
+package in.co.bytehub.mbankaa.controller;
+
+import in.co.bytehub.mbankaa.response.WalletBalanceResponse;
+import in.co.bytehub.mbankaa.security.RequiredRole;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/wallet")
+public class WalletController {
+
+
+    @GetMapping("/balance")
+    @RequiredRole("WalletUser")
+    public WalletBalanceResponse getBalance(@RequestAttribute("user") String userName) {
+        return new WalletBalanceResponse(userName).setBalance(100.0);
+    }
+
+
+}
